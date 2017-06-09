@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+
+		div{
+			position: relative;	
+		}
+		
+	     img{
+			position: absolute;
+			top:0px;
+		}
+		ul{
+			position: fixed;
+			width:30px;
+			height:260px;
+             right:0px;
+             top:200px;
+             list-style: none;
+		}
+		ul li{
+			width:15px;
+			height:18px;
+			background:red;
+			margin-top:20px;
+			border-radius: 5px;
+		}
+		</style>
+		
+	</head>
+	<body>
+
+			<div>
+				<img src="img/4e4.jpg"/>
+				<img src="img/56984fd8-799f-40f0-a730-2081c0defac3.jpg"/>
+			    <img src="img/d3a.jpg"/>
+				<img src="img/ew3.jpg"/>
+                 <ul>
+                 	<li></li>
+                 	<li></li>
+                 	<li></li>
+                 	<li></li>
+                 </ul>
+			</div>
+
+	</body>
+	
+	<script src="jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+	
+      var h=$(window).height();
+      var w=$(window).width();
+
+      var now=0;
+      var next=0;
+      
+      $("img:gt(0)").css("top",h);
+      
+      $("img").css("width",w);
+       $("img").css("height",h);
+       
+      $("body").mousewheel(function(){
+      	
+      	if(!$("img").is(":animated")){ 
+         	next--;
+        	if(next<0){
+      	
+      	    next=$("img").length-1;
+          }
+         $("img").eq(next).css("top",-h);
+      	     	
+      	$("img").eq(now).animate({top:h},1000);     	
+      	$("img").eq(next).animate({top:0},1000);
+      	
+      	$("ul li").eq(next).css("background","yellowgreen");
+      	 $("ul li").eq(next).animate({
+      	 	height:25,
+      	 	width:18
+      	 	},1000)
+      	 		
+      	    $("ul li").eq(next).siblings().css("background","red");
+      	    $("ul li").eq(next).siblings().animate({
+      	 	    height:18,
+      	 	    width:15
+      	 	},1000)
+
+
+      	now=next;
+      	}
+      },function(){
+      	if(!$("img").is(":animated")){ 
+      	next++;
+      	 if(next==$("img").length){
+      	    next=0;      	 
+      }
+        $("img").eq(next).css("top",h);
+        
+      	$("img").eq(now).animate({top:-h},1000);
+      	$("img").eq(next).animate({top:0},1000);
+      	
+      	 $("ul li").eq(next).css("background","yellowgreen");
+      	 $("ul li").eq(next).animate({
+      	 	height:25,
+      	 	width:18
+      	 	},1000)
+      	 		
+      	    $("ul li").eq(next).siblings().css("background","red");
+   	 		$("ul li").eq(next).siblings().animate({
+      	 	    height:18,
+      	 	    width:15
+      	 	},1000)
+      	 	
+      	now=next;
+
+      	}
+      })
+	</script>
+</html>
